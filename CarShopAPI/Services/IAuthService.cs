@@ -5,7 +5,10 @@ namespace CarShopAPI.Services
 {
     public interface IAuthService
     {
-        public Task<SignInResult> GetUser(IdentityUser identityUser);
+        public IdentityUser GetUser(IdentityUser identityUser);
+        public Task<SignInResult> ValidateUser(IdentityUser identityUser);
         public Task<IdentityResult> Create(IdentityUser identityUser);
+        public string GetUserRole(IdentityUser identityUser); 
+        public string GenerateToken(IdentityUser identityUser);
     }
 }

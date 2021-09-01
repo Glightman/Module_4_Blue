@@ -36,7 +36,7 @@ namespace CarShopAPI.API
                 email = credentials.FirstOrDefault();
                 var password = credentials.LastOrDefault();
 
-                var user = await _userService.GetUser(new IdentityUser() { Email = email, PasswordHash = password });
+                var user = await _userService.ValidateUser(new IdentityUser() { UserName = email, PasswordHash = password });
                 if (!user.Succeeded)
                     throw new UnauthorizedAccessException("Credenciais inválidas!");
             }

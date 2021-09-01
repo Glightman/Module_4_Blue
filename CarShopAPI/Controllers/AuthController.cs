@@ -20,7 +20,7 @@ namespace CarShopAPI.Controllers
             _service = service;
         }
 
-        [HttpPatch]
+        [HttpPost]
         [Route("Register")]
         [AllowAnonymous]
         public IActionResult Register(IdentityUser identityUser)
@@ -36,6 +36,19 @@ namespace CarShopAPI.Controllers
             catch
             {
                 return ApiBadRequest("Erro ao tentar criar usuário.");
+            }
+        }
+        [HttpPost]
+        [Route("Token")]
+        public IActionResult Token([FromBody] IdentityUser identityUser)
+        {
+            try
+            {
+                return ApiOk(_service.GenerateToken(identityUser));
+            }
+            catch (Exception e)
+            {
+                return ApiBadRequest(e, e.Message);
             }
         }
     }
