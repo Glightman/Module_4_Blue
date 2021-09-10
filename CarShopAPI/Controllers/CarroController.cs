@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CarShopAPI.Controllers
@@ -23,7 +24,6 @@ namespace CarShopAPI.Controllers
         [HttpGet]
         public IActionResult Index() => ApiOk(_service.All());
 
-        [AuthorizeRoles(RoleTypes.Admin)]
         [Route("Random"), HttpGet]
         public IActionResult RandomItem()
         {
@@ -36,7 +36,6 @@ namespace CarShopAPI.Controllers
                 ApiOk(existente);
         }
 
-        [AuthorizeRoles(RoleTypes.Admin)]
         [Route("{id}")]
         [HttpGet]
         public IActionResult Index(int? id)
@@ -47,19 +46,24 @@ namespace CarShopAPI.Controllers
                 ApiOk(existente);
         }
 
-        [AuthorizeRoles(RoleTypes.Admin)]
         [HttpPost]
-        public IActionResult Create([FromBody] Carro car) =>
-            _service.Create(car) ?
+        public IActionResult Create([FromBody] Carro car)
+        {
+            car.createdById = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            return _service.Create(car) ?
                 ApiOk("Carro cadastrado com sucesso!") :
                 ApiNotFound("Erro ao cadastrar o carro!");
+        }
+            
 
-        [AuthorizeRoles(RoleTypes.Admin)]
         [HttpPut]
-        public IActionResult Update([FromBody] Carro car) =>
-            _service.Update(car)?
-                ApiOk("Carro atualizado com sucesso!") :
-                ApiNotFound("Erro ao atualizar o carro!");
+        public IActionResult Update([FromBody] Carro car)
+        {
+            car.updatedById = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value;
+            return _service.Update(car) ?
+                   ApiOk("Carro atualizado com sucesso!") :
+                   ApiNotFound("Erro ao atualizar o carro!");
+        }
 
         [AuthorizeRoles(RoleTypes.Admin)]
         [Route("{id}")]
@@ -68,5 +72,13 @@ namespace CarShopAPI.Controllers
             _service.Delete(id) ?
                 ApiOk("Carro deletado com sucesso!") :
                 ApiNotFound("Erro ao deletar o carro!");
+
+        [AllowAnonymous]
+        [Route("CarroByRole/{role?}")]
+        [HttpGet]
+        public IActionResult CarrosByRole(string role)
+        {
+            return ApiOk(_service.CarrosByUserRole(role));
+        }
     }
 } 

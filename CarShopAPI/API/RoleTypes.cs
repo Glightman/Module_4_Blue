@@ -7,7 +7,7 @@ namespace CarShopAPI.API
 {
     public enum RoleTypes
     {
-        Common = 1,
-        Admin = 0
+        Admin,
+        Common
     }
 }

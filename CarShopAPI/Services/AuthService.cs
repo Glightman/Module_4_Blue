@@ -39,7 +39,7 @@ namespace CarShopAPI.Services
         public string GenerateToken(IdentityUser identityUser)
         {
             var user = GetUser(identityUser);
-            var role = GetUserRole(identityUser);
+            var role = GetUserRole(user);
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -47,7 +47,8 @@ namespace CarShopAPI.Services
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.UserName.ToString()),
-                    new Claim(ClaimTypes.Role, role)
+                    new Claim(ClaimTypes.Role, role),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id)
                 }),
                 Expires = DateTime.UtcNow.AddHours(2),
                 SigningCredentials = new SigningCredentials(

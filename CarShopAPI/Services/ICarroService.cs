@@ -13,5 +13,6 @@ namespace CarShopAPI.Services
         bool Create(Carro c);
         bool Update(Carro c);
         bool Delete(int? id);
+        List<Carro> CarrosByUserRole(string role);
     }
 }

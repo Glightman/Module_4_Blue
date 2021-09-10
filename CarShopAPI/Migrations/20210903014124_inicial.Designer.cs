@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarShopAPI.Migrations
 {
     [DbContext(typeof(CarShopContext))]
-    [Migration("20210829212525_inicio")]
-    partial class inicio
+    [Migration("20210903014124_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -31,6 +31,12 @@ namespace CarShopAPI.Migrations
                     b.Property<int>("ano")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("createdById")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("descricao")
                         .HasColumnType("nvarchar(max)");
 
@@ -43,10 +49,20 @@ namespace CarShopAPI.Migrations
                     b.Property<double>("preco")
                         .HasColumnType("float");
 
+                    b.Property<DateTime?>("updated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("updatedById")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("url1")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("createdById");
+
+                    b.HasIndex("updatedById");
 
                     b.ToTable("Carro");
                 });
@@ -194,10 +210,12 @@ namespace CarShopAPI.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -234,10 +252,12 @@ namespace CarShopAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -245,6 +265,21 @@ namespace CarShopAPI.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CarShopAPI.Models.Carro", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "createdBy")
+                        .WithMany()
+                        .HasForeignKey("createdById");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "updatedBy")
+                        .WithMany()
+                        .HasForeignKey("updatedById");
+
+                    b.Navigation("createdBy");
+
+                    b.Navigation("updatedBy");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
