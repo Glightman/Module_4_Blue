@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CarShopAPI</name>
+    </assembly>
+    <members>
+        <member name="M:CarShopAPI.Controllers.AuthController.Register(Microsoft.AspNetCore.Identity.IdentityUser)">
+            <summary>
+            Cria um novo login de usuário.
+            </summary>
+            <param name="identityUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarShopAPI.Controllers.AuthController.Token(Microsoft.AspNetCore.Identity.IdentityUser)">
+            <summary>
+            Cria um novo token para o usuário.
+            </summary>
+            <param name="identityUser"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarShopAPI.Controllers.CarroController.Index">
+            <summary>
+            Este método retorna uma lista com todos os carros armazenados no banco de dados da loja.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CarShopAPI.Controllers.CarroController.RandomItem">
+            <summary>
+            Este método retorna apenas um carro específico selecionado de forma aleatória por meio do seu id.
+            </summary>
+            <returns></returns> 
+        </member>
+        <member name="M:CarShopAPI.Controllers.CarroController.Index(System.Nullable{System.Int32})">
+            <summary>
+            Este método retorna apenas um carro específico selecionado por meio de seu id recebido como parâmetro.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarShopAPI.Controllers.CarroController.Create(CarShopAPI.Models.Carro)">
+            <summary>
+            Este método é usado para cadastrar um novo carro no banco de dados.
+            </summary>
+            <param name="car"></param>
+            <returns></returns> 
+        </member>
+        <member name="M:CarShopAPI.Controllers.CarroController.Update(CarShopAPI.Models.Carro)">
+            <summary>
+            Este método é usado para editar um carro que já foi cadastrado no banco de dados.
+            </summary>
+            <param name="car"></param>
+            <returns></returns> 
+        </member>
+        <member name="M:CarShopAPI.Controllers.CarroController.Delete(System.Nullable{System.Int32})">
+            <summary>
+            Este método é usado para EXCLUIR um carro existente no banco de dados.
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CarShopAPI.Controllers.CarroController.CarrosByRole(System.String)">
+            <summary>
+            Este método é usado para consultar uma lista de carros cadastradados por um determinado usuário/cargo.
+            </summary>
+            <param name="role"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

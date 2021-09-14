@@ -138,3 +138,4 @@ C:\Users\gabri\OneDrive\Documentos\GitHub\Modulo4_API\Module_4_Blue\CarShopAPI\o
 C:\Users\gabri\OneDrive\Documentos\GitHub\Modulo4_API\Module_4_Blue\CarShopAPI\obj\Debug\net5.0\CarShopAPI.pdb
 C:\Users\gabri\OneDrive\Documentos\GitHub\Modulo4_API\Module_4_Blue\CarShopAPI\obj\Debug\net5.0\CarShopAPI.genruntimeconfig.cache
 C:\Users\gabri\OneDrive\Documentos\GitHub\Modulo4_API\Module_4_Blue\CarShopAPI\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\gabri\OneDrive\Documentos\GitHub\Modulo4_API\Module_4_Blue\CarShopAPI\bin\Debug\net5.0\CarShopAPI.xml
